@@ -1,12 +1,27 @@
 import React, { Component } from 'react';
 import './App.css';
 
+
 class SearchBox extends Component {
+  constructor(){
+    super();
+      this.state = {
+        search : ""
+    };
+  }
+
+updateSearch(event){
+  this.setState({search : event.target.value});
+  console.log(  this.state.search);
+}
+
   render(){
     return(
       <div style= {{display : 'inline-block', width: '15%' }}>
-      <h3>WikiViewer</h3>
-      <input className="App-input" type = "text"/>
+        <h3>WikiViewer</h3>
+        <input className="App-input"
+        type = "text" value = {this.state.search}
+        onChange = {this.updateSearch.bind(this)}/>
 
       </div>
     )
@@ -14,6 +29,7 @@ class SearchBox extends Component {
 }
 
 class QueryResolutions extends Component {
+
   render() {
     return (
       <div>
