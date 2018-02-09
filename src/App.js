@@ -73,13 +73,13 @@ class Random extends Component {
 
 
   handleButtonClick() {
-  this.componentDidMount(); 
+  this.componentDidMount();
 }
 
   render(){
     return(
     <div>
-    <button onClick={this.handleButtonClick.bind(this)}>
+    <button style = {{top : "7px" , position : "relative"}} onClick={this.handleButtonClick.bind(this)}>
           Random
         </button>
     </div>
