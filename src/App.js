@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import './App.css';
 
 //git config --global core.autocrlf true
-
 const randomRequest = "https://en.wikipedia.org/api/rest_v1/page/random/title";
 
 class SearchBox extends Component {
@@ -54,7 +53,7 @@ class Random extends Component {
 
   }
 
-  randomClick() {
+  componentDidMount() {
 
 
        fetch(randomRequest)
@@ -68,14 +67,13 @@ class Random extends Component {
      }
 
      openWindow(obj){
-
-       let objetivo = obj;
-       if (objetivo) window.open('https://en.wikipedia.org/wiki/' +objetivo.title) ;
+       let objTarget = obj;
+       if (objTarget) window.open('https://en.wikipedia.org/wiki/' +objTarget.title) ;
      }
 
 
   handleButtonClick() {
-  this.randomClick();
+  this.componentDidMount(); 
 }
 
   render(){
