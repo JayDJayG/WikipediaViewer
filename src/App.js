@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import './App.css';
 
+//git config --global core.autocrlf true
+
+const randomRequest = "https://en.wikipedia.org/api/rest_v1/page/random/title";
 
 class SearchBox extends Component {
   constructor(){
@@ -12,7 +15,7 @@ class SearchBox extends Component {
 
 updateSearch(event){
   this.setState({search : event.target.value});
-  console.log(  this.state.search);
+
 }
 
   render(){
@@ -42,6 +45,49 @@ class QueryResolutions extends Component {
   }
 }
 
+class Random extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      uri : {},
+    }
+
+  }
+
+  randomClick() {
+
+
+       fetch(randomRequest)
+        .then(response => response.json())
+        .then(data => this.setState({ uri: data.items})).catch(err => console.log('ERROR', err));
+
+
+        this.openWindow(this.state.uri[0]);
+
+
+     }
+
+     openWindow(obj){
+
+       let objetivo = obj;
+       if (objetivo) window.open('https://en.wikipedia.org/wiki/' +objetivo.title) ;
+     }
+
+
+  handleButtonClick() {
+  this.randomClick();
+}
+
+  render(){
+    return(
+    <div>
+    <button onClick={this.handleButtonClick.bind(this)}>
+          Random
+        </button>
+    </div>
+  );
+  }
+}
 
 class App extends Component {
   render() {
@@ -52,6 +98,7 @@ class App extends Component {
         </header>
         <div>
           <SearchBox/>
+          <Random/>
           <p></p>
           <QueryResolutions/>
           <p></p>
