@@ -9,13 +9,22 @@ class SearchBox extends Component {
     super();
       this.state = {
         search : ""
+
     };
   }
 
 updateSearch(event){
   this.setState({search : event.target.value});
-
+  this.fetchSearch(this.state.search);
 }
+
+  fetchSearch(str){
+    let res = str.replace(/ /g, "%20");
+    let req = "https://en.wikipedia.org/api/rest_v1/page/summary/" + res;
+
+    console.log(res);
+    console.log(req);
+  }
 
   render(){
     return(
@@ -26,6 +35,7 @@ updateSearch(event){
         onChange = {this.updateSearch.bind(this)}/>
 
       </div>
+
     )
   }
 }
@@ -53,19 +63,17 @@ class Random extends Component {
 
   }
 
+  //Getting an object since the very start of the app
   componentDidMount() {
-
-
        fetch(randomRequest)
         .then(response => response.json())
         .then(data => this.setState({ uri: data.items})).catch(err => console.log('ERROR', err));
 
-
         this.openWindow(this.state.uri[0]);
-
 
      }
 
+     //New window with a random Wikipedia page
      openWindow(obj){
        let objTarget = obj;
        if (objTarget) window.open('https://en.wikipedia.org/wiki/' +objTarget.title) ;
