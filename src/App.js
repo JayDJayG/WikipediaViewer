@@ -2,13 +2,13 @@ import React, { Component } from 'react';
 import './App.css';
 
 //git config --global core.autocrlf true
-const randomRequest = "https://en.wikipedia.org/api/rest_v1/page/random/title";
 
 class SearchBox extends Component {
   constructor(){
     super();
       this.state = {
-        search : ""
+        search : "",
+        object : {},
 
     };
   }
@@ -20,10 +20,14 @@ updateSearch(event){
 
   fetchSearch(str){
     let res = str.replace(/ /g, "%20");
-    let req = "https://en.wikipedia.org/api/rest_v1/page/summary/" + res;
+    let request = "https://en.wikipedia.org/api/rest_v1/page/summary/" + res;
 
-    console.log(res);
-    console.log(req);
+    fetch(request)
+     .then(response => response.json())
+     .then(data => this.setState({ object: data})).catch(err => console.log('ERROR', err));
+
+     console.log(this.state.object);
+
   }
 
   render(){
@@ -65,6 +69,9 @@ class Random extends Component {
 
   //Getting an object since the very start of the app
   componentDidMount() {
+
+    const randomRequest = "https://en.wikipedia.org/api/rest_v1/page/random/title";
+
        fetch(randomRequest)
         .then(response => response.json())
         .then(data => this.setState({ uri: data.items})).catch(err => console.log('ERROR', err));
