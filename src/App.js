@@ -9,8 +9,8 @@ class SearchBox extends Component {
       this.state = {
         search : "",
         object : {},
-
-    };
+    }
+    this.fetchSearch = this.fetchSearch.bind(this);
   }
 
 updateSearch(event){
@@ -20,14 +20,17 @@ updateSearch(event){
 
   fetchSearch(str){
     let res = str.replace(/ /g, "%20");
-    let request = "https://en.wikipedia.org/api/rest_v1/page/summary/" + res;
-
+    let request = "https://en.wikipedia.org/api/rest_v1/page/related/" + res;
+//I will receive 5 answers, I will display the 5 answers and for every one it should open a new window if clicked
     fetch(request)
      .then(response => response.json())
      .then(data => this.setState({ object: data})).catch(err => console.log('ERROR', err));
 
-     console.log(this.state.object);
-
+     if (this.state.object.pages){
+       for (let page of this.state.object.pages){
+            console.log(page);
+       }
+     }
   }
 
   render(){
@@ -45,7 +48,12 @@ updateSearch(event){
 }
 
 class QueryResolutions extends Component {
-
+  constructor(props){
+    super(props);
+    this.state = {
+      
+    }
+  }
   render() {
     return (
       <div>
