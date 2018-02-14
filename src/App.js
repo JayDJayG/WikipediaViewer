@@ -19,6 +19,8 @@ updateSearch(event){
 }
 
   fetchSearch(str){
+
+    const arr = [];
     let res = str.replace(/ /g, "%20");
     let request = "https://en.wikipedia.org/api/rest_v1/page/related/" + res;
 //I will receive 5 answers, I will display the 5 answers and for every one it should open a new window if clicked
@@ -28,19 +30,22 @@ updateSearch(event){
 
      if (this.state.object.pages){
        for (let page of this.state.object.pages){
-            console.log(page);
+            arr.push(page);
        }
      }
   }
 
   render(){
+    if(this.arr)console.log("True");
+
+    //Lo dejaste aqui!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
     return(
       <div style= {{display : 'inline-block', width: '15%' }}>
         <h3>WikiViewer</h3>
         <input className="App-input"
         type = "text" value = {this.state.search}
         onChange = {this.updateSearch.bind(this)}/>
-
       </div>
 
     )
@@ -51,7 +56,7 @@ class QueryResolutions extends Component {
   constructor(props){
     super(props);
     this.state = {
-      
+
     }
   }
   render() {
