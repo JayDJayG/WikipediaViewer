@@ -36,9 +36,7 @@ updateSearch(event){
   }
 
   render(){
-  //  if(this.arr)console.log("True");
-
-    //Lo dejaste aqui!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    const {object} = this.state;
 
     return(
       <div style= {{display : 'inline-block', width: '15%' }}>
@@ -46,6 +44,7 @@ updateSearch(event){
         <input className="App-input"
         type = "text" value = {this.state.search}
         onChange = {this.updateSearch.bind(this)}/>
+        <QueryResolutions wikiobject = {object} />
       </div>
 
     )
@@ -107,7 +106,7 @@ class Random extends Component {
   render(){
     return(
     <div>
-    <button style = {{top : "7px" , position : "relative"}} onClick={this.handleButtonClick.bind(this)}>
+    <button style = {{top : "1px" , position : "relative", color: "white", color: "black"}} onClick={this.handleButtonClick.bind(this)}>
           Random
         </button>
     </div>
@@ -121,10 +120,13 @@ class App extends Component {
       <div className="App">
         <header className="App-header">
           <h1 className="App-title">Wikipedia Viewer</h1>
-        </header>
-        <div>
-          <SearchBox/>
           <Random/>
+        </header>
+
+        <div>
+
+          <SearchBox/>
+
           <p></p>
           <QueryResolutions/>
           <p></p>
