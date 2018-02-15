@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
-
+import axios from 'axios';
 //git config --global core.autocrlf true
 
 class SearchBox extends Component {
@@ -20,23 +20,23 @@ updateSearch(event){
 
   fetchSearch(str){
 
-    const arr = [];
     let res = str.replace(/ /g, "%20");
     let request = "https://en.wikipedia.org/api/rest_v1/page/related/" + res;
 //I will receive 5 answers, I will display the 5 answers and for every one it should open a new window if clicked
-    fetch(request)
-     .then(response => response.json())
-     .then(data => this.setState({ object: data})).catch(err => console.log('ERROR', err));
+     axios.get(request)
+     .then((response) => {
+      this.setState({ object: response.data.pages})
+    }).catch( (error) => {
+      this.setState({ object: error})
 
-     if (this.state.object.pages){
-       for (let page of this.state.object.pages){
-            arr.push(page);
-       }
-     }
+  });
+
+    if (this.state.object)console.log(this.state.object);
+
   }
 
   render(){
-    if(this.arr)console.log("True");
+  //  if(this.arr)console.log("True");
 
     //Lo dejaste aqui!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
