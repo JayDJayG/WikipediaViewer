@@ -31,23 +31,20 @@ updateSearch(event){
       this.setState({ object: error})
 
   });
-
-    if (this.state.object)console.log(this.state.object);
-
   }
 
   render(){
     const {object} = this.state;
-
     return(
+    <div>
       <div style= {{display : 'inline-block', width: '15%' }}>
         <h3>WikiViewer</h3>
         <input className="App-input"
         type = "text" value = {this.state.search}
         onChange = {this.updateSearch.bind(this)}/>
-        <QueryResolutions wikiobject = {object} />
       </div>
-
+      <QueryResolutions  wikiobject = {object} />
+    </div>
     )
   }
 }
@@ -55,11 +52,11 @@ updateSearch(event){
 class QueryResolutions extends Component {
   constructor(props){
     super(props);
-    this.state = {
 
-    }
   }
   render() {
+    const wikiobject = this.props.wikiobject;
+    console.log(wikiobject);
     return (
       <div>
         <div className = "Box">
@@ -80,15 +77,8 @@ class App extends Component {
           <h1 className="App-title">Wikipedia Viewer</h1>
           <Random/>
         </header>
-
         <div>
-
           <SearchBox/>
-
-          <p></p>
-          <QueryResolutions/>
-          <p></p>
-          <QueryResolutions/>
         </div>
       </div>
     );
