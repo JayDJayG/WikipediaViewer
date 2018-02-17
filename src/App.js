@@ -4,6 +4,8 @@ import axios from 'axios';
 import Random from './Random';
 //git config --global core.autocrlf true
 
+axios.defaults.headers.post['Content-Type'] = {'Api-User-Agent': 'j.d.guzman.v@gmail.com'};
+
 class SearchBox extends Component {
   constructor(){
     super();
@@ -22,7 +24,7 @@ updateSearch(event){
   fetchSearch(str){
 
     let res = str.replace(/ /g, "%20");
-    let request = "https://en.wikipedia.org/api/rest_v1/page/related/" + res;
+    let request = `https://en.wikipedia.org/w/api.php?action=query&titles=${res}&prop=revisions&rvprop=content&format=json&formatversion=2` ;
 //I will receive 5 answers, I will display the 5 answers and for every one it should open a new window if clicked
      axios.get(request)
      .then((response) => {
@@ -63,19 +65,15 @@ class QueryResolutions extends Component {
     );
 }
 
-      return (
-      <div className = "Box">
-      <h4>{
+else {
+  return (
+  <div className = "Box">
+  <h4>{
 
-
-
-      }</h4>
-      </div>
-    )
-
-
-
-  }
+  }</h4>
+  </div>
+)}
+}
 }
 
 
