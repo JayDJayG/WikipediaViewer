@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
-import axios from 'axios';
+
 
 class Random extends Component {
   constructor(props) {

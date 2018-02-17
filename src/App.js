@@ -52,19 +52,29 @@ updateSearch(event){
 class QueryResolutions extends Component {
   constructor(props){
     super(props);
-
   }
+
   render() {
-    const wikiobject = this.props.wikiobject;
-    console.log(wikiobject);
+    //const wikiobject = this.props.wikiobject;
+
+    if (!this.props.wikiobject || this.props.wikiobject === undefined) {
     return (
-      <div>
-        <div className = "Box">
-          <h3>Title</h3>
-          <p>lorem ipsum </p>
-        </div>
+       <div> ... my loading placeholder ... </div>
+    );
+}
+
+      return (
+      <div className = "Box">
+      <h4>{
+
+
+
+      }</h4>
       </div>
     )
+
+
+
   }
 }
 
