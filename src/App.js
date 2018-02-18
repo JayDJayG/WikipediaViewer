@@ -4,8 +4,6 @@ import axios from 'axios';
 import Random from './Random';
 //git config --global core.autocrlf true
 
-axios.defaults.headers.post['Content-Type'] = {'Api-User-Agent': 'j.d.guzman.v@gmail.com'};
-
 class SearchBox extends Component {
   constructor(){
     super();
@@ -24,15 +22,19 @@ updateSearch(event){
   fetchSearch(str){
 
     let res = str.replace(/ /g, "%20");
-    let request = `https://en.wikipedia.org/w/api.php?action=query&titles=${res}&prop=revisions&rvprop=content&format=json&formatversion=2` ;
-//I will receive 5 answers, I will display the 5 answers and for every one it should open a new window if clicked
+    let request = `https://en.wikipedia.org/w/api.php?action=opensearch&format=json&origin=*&search=${res}` ;
+    let cors = "https://cors-anywhere.herokuapp.com/";
+    //I will receive 5 answers, I will display the 5 answers and for every one it should open a new window if clicked
+
+
      axios.get(request)
      .then((response) => {
-      this.setState({ object: response.data.pages})
+      this.setState({ object: response.data})
     }).catch( (error) => {
       this.setState({ object: error})
 
   });
+
   }
 
   render(){
@@ -57,11 +59,24 @@ class QueryResolutions extends Component {
   }
 
   render() {
-    //const wikiobject = this.props.wikiobject;
+    const wikiobjects = this.props.wikiobject;
+    let wikiextraction = [];
+
+    if (wikiobjects)
+    {
+      for (var wikiobject in wikiobjects){
+        if(wikiobjects.hasOwnProperty(wikiobject)){
+          console.log(`key is ${wikiobject} value is ${wikiobjects[wikiobject]}`);
+          if(wikiobject == "revisions")wikiextraction.push(wikiobjects["revisions"]["0"].content);
+        }
+
+    }}
+
+
 
     if (!this.props.wikiobject || this.props.wikiobject === undefined) {
     return (
-       <div> ... my loading placeholder ... </div>
+       <div> ... No Information Available ... </div>
     );
 }
 
@@ -69,7 +84,7 @@ else {
   return (
   <div className = "Box">
   <h4>{
-
+  wikiextraction
   }</h4>
   </div>
 )}
