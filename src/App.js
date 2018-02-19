@@ -53,16 +53,14 @@ updateSearch(event){
   render(){
     const {object} = this.state;
     const titles = this.state.titles;
-    const description = this.state.description;
-    const links = this.state.links;
 
     return(
     <div>
-      <div className="text-center" style= {{display : 'inline-block', width: '15%' }}>
+      <div className="text-center " style= {{display : 'inline-block', width: '50%' }}>
 
-        <div className = "form-group">
-          <form onSubmit={this.handleSubmit} className = "form-inline mx-auto d-block">
-            <h3>WikipediaSearch: </h3>
+        <div className = "form-group d-flex justify-content-start">
+          <form onSubmit={this.handleSubmit} className = " form-inline mx-auto d-block">
+            <h3 className= "mx-auto">WikipediaSearch:</h3>
 
             <input className="App-input"
             type = "text" value = {this.state.search}
@@ -73,17 +71,26 @@ updateSearch(event){
           </form>
         </div>
       </div>
-
-      <div className = "row">
+    <div>
+    {
+      titles.map((title, i) =>
+      <div className = "row" key={i}>
         <div className = "col-md-12">
-          <div className="card-block mt-4">
 
-            <h3 className="mb-2">Hola mundo</h3>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In facilisis erat sit amet fermentum suscipit. Maecenas imperdiet nulla quam, ut pellentesque velit ultrices sed. Quisque eleifend condimentum nisi vel egestas. Sed sollicitudin, leo ac commodo ultricies, quam turpis luctus turpis, eget tincidunt eros turpis vel velit. Duis ultricies tortor vitae porttitor malesuada. Phasellus a elit porttitor, tristique justo eu, fermentum nunc. Curabitur ac efficitur felis. Sed ac diam ac diam fringilla tincidunt et et lectus. Duis sodales vel urna semper placerat. Quisque suscipit scelerisque libero at pretium. Quisque viverra elit et lectus mollis, et facilisis arcu tristique. Nunc tincidunt lobortis diam, vel pellentesque purus imperdiet et. Maecenas est augue, porttitor sed nibh ut, tincidunt porta mauris. Quisque vel consectetur nibh. Mauris eu felis lorem.</p>
+           <div className="card-block mt-4">
+            <a href ={this.state.links[i]} style ={{display: 'block'}} target="_blank">
+              <h3 className="mb-2">{title}</h3>
+
+            <p>{this.state.description[i]}</p>
+            </a>
 
             </div>
           </div>
-      </div>
+      </div>)
+
+    }
+
+    </div>
   </div>
     )
   }
