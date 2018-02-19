@@ -15,11 +15,13 @@ class SearchBox extends Component {
         links: [],
     }
     this.fetchSearch = this.fetchSearch.bind(this);
+    this.updateSearch = this.updateSearch.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
 updateSearch(event){
   this.setState({search : event.target.value});
-  this.fetchSearch(this.state.search);
+  //this.fetchSearch(this.state.search);
 }
 
   fetchSearch(str){
@@ -44,19 +46,34 @@ updateSearch(event){
 
   }
 
+  handleSubmit(e){
+      e.preventDefault();
+      let str = this.state.search;
+      this.fetchSearch(str);
+  }
+
   render(){
     const {object} = this.state;
     const titles = this.state.titles;
     const description = this.state.description;
     const links = this.state.links;
-    
+
     return(
     <div>
       <div className="text-center" style= {{display : 'inline-block', width: '15%' }}>
-        <h3>WikipediaSearch: </h3>
-        <input className="App-input"
-        type = "text" value = {this.state.search}
-        onChange = {this.updateSearch.bind(this)}/>
+
+        <div className = "form-group">
+          <form onSubmit={this.handleSubmit} className = "form-inline mx-auto d-block">
+            <h3>WikipediaSearch: </h3>
+
+            <input className="App-input"
+            type = "text" value = {this.state.search}
+            onChange = {this.updateSearch}/>
+
+            <button type = "submit" className= "btn btn-light mt-1 "
+            style= {{cursor : "pointer"}}> Search </button>
+          </form>
+        </div>
       </div>
       <QueryResolutions  wikiobject = {object} />
     </div>

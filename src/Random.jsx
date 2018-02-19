@@ -38,7 +38,7 @@ class Random extends Component {
   render(){
     return(
     <div>
-    <button style = {{top : "1px" , position : "relative",  color: "black"}} onClick={this.handleButtonClick.bind(this)}>
+    <button style = {{top : "1px" , position : "relative", cursor : "pointer"}} className="btn-light" onClick={this.handleButtonClick.bind(this)}>
           Random
         </button>
     </div>
