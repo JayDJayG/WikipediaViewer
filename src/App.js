@@ -23,8 +23,7 @@ updateSearch(event){
 
     let res = str.replace(/ /g, "%20");
     let request = `https://en.wikipedia.org/w/api.php?action=opensearch&format=json&origin=*&search=${res}` ;
-    let cors = "https://cors-anywhere.herokuapp.com/";
-    //I will receive 5 answers, I will display the 5 answers and for every one it should open a new window if clicked
+    //The request will receive several answers, It will display the answers and for every one it should open a new window if clicked
 
 
      axios.get(request)
@@ -54,38 +53,24 @@ updateSearch(event){
 }
 
 class QueryResolutions extends Component {
-  constructor(props){
-    super(props);
-  }
-
+  
   render() {
     const wikiobjects = this.props.wikiobject;
-    let wikiextraction = [];
-
-    if (wikiobjects)
-    {
-      for (var wikiobject in wikiobjects){
-        if(wikiobjects.hasOwnProperty(wikiobject)){
-          console.log(`key is ${wikiobject} value is ${wikiobjects[wikiobject]}`);
-          if(wikiobject == "revisions")wikiextraction.push(wikiobjects["revisions"]["0"].content);
-        }
-
-    }}
 
 
+    if (wikiobjects){
+      console.log(wikiobjects);
+      }
 
     if (!this.props.wikiobject || this.props.wikiobject === undefined) {
-    return (
-       <div> ... No Information Available ... </div>
-    );
-}
+    return (<div> ... No Information Available ... </div>)}
 
 else {
   return (
   <div className = "Box">
-  <h4>{
-  wikiextraction
-  }</h4>
+  {
+
+  }
   </div>
 )}
 }
