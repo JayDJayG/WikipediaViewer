@@ -10,6 +10,9 @@ class SearchBox extends Component {
       this.state = {
         search : "",
         object : {},
+        titles : [],
+        description : [],
+        links: [],
     }
     this.fetchSearch = this.fetchSearch.bind(this);
   }
@@ -28,7 +31,12 @@ updateSearch(event){
 
      axios.get(request)
      .then((response) => {
-      this.setState({ object: response.data})
+      this.setState({
+        object: response.data,
+        titles : response.data[1],
+        description : response.data[2],
+        links : response.data[3],
+       })
     }).catch( (error) => {
       this.setState({ object: error})
 
@@ -38,6 +46,10 @@ updateSearch(event){
 
   render(){
     const {object} = this.state;
+    const titles = this.state.titles;
+    const description = this.state.description;
+    const links = this.state.links;
+    
     return(
     <div>
       <div className="text-center" style= {{display : 'inline-block', width: '15%' }}>
@@ -53,6 +65,7 @@ updateSearch(event){
 }
 
 class QueryResolutions extends Component {
+
 
   render() {
     const wikiobjects = this.props.wikiobject;
