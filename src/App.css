@@ -20,11 +20,11 @@
    display: flex;
    justify-content: center;
   align-items: center;
-
 }
 
-
 .card-block {
-  background: #303030;
-  color: #d2d2d2;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.8);}
+  background: #222;
+  color: #d2d2d4;
+  border: 1px solid black;
+  cursor : pointer;
+  }
